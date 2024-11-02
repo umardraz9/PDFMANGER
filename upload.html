@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Upload and Management</title>
+    
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="upload-styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+</head>
+<body class="dot-grid-background">
+    <div class="toolbar glass">
+        <button id="addBtn" class="toolbar-btn">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add</span> <!-- Text visible on large screens -->
+        </button>
+        <button id="rotateLeftBtn" class="toolbar-btn">
+            <i class="fas fa-undo-alt"></i>
+            <span>Left</span> <!-- Text visible on large screens -->
+        </button>
+        <button id="rotateRightBtn" class="toolbar-btn">
+            <i class="fas fa-redo-alt"></i>
+            <span>Right</span> <!-- Text visible on large screens -->
+        </button>
+        <label class="switch">
+            <input type="checkbox" id="showPagesToggle">
+            <span class="slider"></span>
+            <span class="toggle-text">Show pages</span>
+        </label>
+        <button id="finishBtn" class="finish-btn">Finish</button>
+    </div>
+
+    <div class="main-content">
+        <div id="uploadArea" class="upload-area glass">
+            <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <input type="file" id="fileInput" accept=".pdf" multiple style="display: none;">
+            <button id="selectFilesBtn" class="upload-btn">Select Files</button>
+            <p>Add <strong>PDF, image, Word, Excel</strong>, and <strong>PowerPoint</strong> files</p>
+            <div class="supported-formats">
+                <span class="format pdf">PDF</span>
+                <span class="format doc">DOC</span>
+                <span class="format xls">XLS</span>
+                <span class="format ppt">PPT</span>
+                <span class="format png">PNG</span>
+                <span class="format jpg">JPG</span>
+            </div>
+        </div>
+        <div id="fileList" class="file-list"></div>
+    </div>
+
+    <script src="upload.js"></script>
+</body>
+</html>

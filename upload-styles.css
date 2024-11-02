@@ -1,0 +1,554 @@
+/* Importing Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* Global Reset and Body Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    transition: all 0.3s ease;
+}
+
+/* Glassmorphism Style */
+.glass {
+    background: rgba(145, 83, 83, 0.2);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+/* Dot Grid Background */
+.dot-grid-background {
+    background-color: #f0f2f5;
+    background-image: radial-gradient(#d3d3d3 1px, transparent 1px), radial-gradient(#d3d3d3 1px, transparent 1px);
+    background-size: 10px 10px;
+    background-position: 0 0, 5px 5px;
+}
+
+/* Toolbar styles */
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    justify-content: center;
+    flex-wrap: wrap; /* For responsiveness */
+}
+
+.toolbar-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: transparent;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-btn i {
+    font-size: 12px; /* Adjust icon size */
+}
+
+.toolbar-btn:hover {
+    background-color: #e9ecef;
+    transform: scale(1.05); /* Small zoom on hover */
+}
+
+.toolbar-btn:active {
+    transform: scale(0.95); /* Button click effect */
+}
+
+.finish-btn {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.finish-btn:hover {
+    background-color: #e2e6ea;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: row; /* Horizontal layout on small screens */
+    }
+
+    .toolbar-btn {
+        justify-content: center;
+        padding: 8px;
+        width: 50px; /* Icon buttons should be square-like on small screens */
+        height: 50px;
+    }
+
+    .toolbar-btn span {
+        display: none; /* Hide the text on small screens */
+    }
+
+    .finish-btn {
+        width: 50px;
+        padding: 8px;
+        text-align: center;
+    }
+}
+
+/* Upload Area Centering */
+.main-content {
+    flex-grow: 10;
+    padding: 40px;
+    display: center;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px);
+    transition: all 1s ease-out;
+}
+
+.upload-area {
+    width: 100%;
+    max-width: 100%;
+    background-color: #ffffff;
+    border: 2px dashed #d0d0d0;
+    text-align: center;
+    padding: 40px;
+    border-radius: 15px;
+    color: #333;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.upload-area:hover {
+    border-color: #007bff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.upload-icon {
+    font-size: 50px;
+    color: #007bff;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.upload-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.upload-btn i {
+    margin-left: 5px;
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+/* File List Grid Layout */
+.file-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+/* File item styling */
+.file-item {
+    width: 150px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* PDF preview canvas */
+.pdf-canvas {
+    width: 100%;
+    height: auto;
+    max-height: 180px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* File name styling */
+.file-name {
+    font-size: 10px;
+    margin: 5px 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Page count styling */
+.page-count {
+    font-size: 10px;
+    color: #888;
+}
+
+/* File type label */
+.file-type {
+    font-size: 10px;
+    margin-top: 5px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    color: white;
+    display: inline-block;
+}
+
+/* Different background colors for different file types */
+.pdf-type {
+    background-color: #ff6b6b;
+}
+.word-type {
+    background-color: #6c5ce7;
+}
+.excel-type {
+    background-color: #55efc4;
+}
+.ppt-type {
+    background-color: #fdcb6e;
+}
+.image-type {
+    background-color: #74b9ff;
+}
+/* File item styling */
+.file-item {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.file-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.file-item:hover .file-actions {
+    opacity: 1; /* Show buttons on hover */
+}
+
+.action-btn {
+     background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    color: #333;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+/* Hover effect for the buttons */
+.action-btn:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.1); /* Scale up slightly on hover */
+    
+      
+}
+
+/* Specific icon sizes to match the image */
+.action-btn i {
+    font-size: 18px;
+}
+
+/* Add separate icons for zoom, rotate, etc., depending on their use case */
+.action-btn.zoom { /* Add this class to the zoom button */
+    content: url('path_to_zoom_icon');
+}
+
+.action-btn.rotate { /* Add this class to the rotate button */
+    content: url('path_to_rotate_icon');
+}
+
+.action-btn.delete { /* Add this class to the delete button */
+    content: url('path_to_delete_icon');
+}
+/* Icons */
+.action-btn i {
+    font-size: 18px;
+}
+/* ... (previous CSS rules remain unchanged) ... */
+
+.file-item {
+    width: 150px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: move; /* Indicates item is draggable */
+}
+
+.file-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 0px;
+    opacity: 5%;
+    transition: opacity 0.3s ease;
+}
+
+.file-item:hover .file-actions {
+    opacity: 1;
+}
+
+.action-btn {
+    background-color: rgba(255, 255, 255, 0.9); /* Neutral background */
+    border: none;
+    color: #333;
+    padding: 8px;
+    border-radius: 6px; /* Adjust radius for cleaner look */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smoother transition */
+    box-shadow: none; /* Remove shadow */
+}
+
+.action-btn:hover {
+     background-color: rgba(255, 255, 255, 0.9); /* No change on hover */
+    color: #333; /* Keep the text color consistent */
+    transform: none; /* No scaling effect */
+/* 5. Loader styles */
+}
+
+/* Additional settings to prevent active/focus outline */
+.action-btn:focus {
+    outline: none;
+    box-shadow: none; /* Remove any focus ring or box shadow */
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* 6. Different background colors for each card */
+.file-item:nth-child(5n+1) { background-color: #f0f4ff; }
+.file-item:nth-child(5n+2) { background-color: #fff0f0; }
+.file-item:nth-child(5n+3) { background-color: #f0fff0; }
+.file-item:nth-child(5n+4) { background-color: #fff0ff; }
+.file-item:nth-child(5n+5) { background-color: #fffff0; }
+
+/* Styles for the zoom modal */
+/* ... (previous styles remain unchanged) ... */
+
+/* Styles for the zoom modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    position: relative;
+}
+
+.modal-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-controls button {
+    padding: 12px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-controls button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.modal-controls button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+.modal-controls button i {
+    font-size: 18px;
+}
+
+/* Updated close button styles */
+.close-btn {
+    padding: 12px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn i {
+    font-size: 18px;
+    color: #ff0000; /* Red color for the close button icon */
+    
+}
+
+.close-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    
+}
+
+.close-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+.modal-content h2 {
+    font-size: 8px;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+/* ... (rest of the styles remain unchanged) ... */
+
+.sortable-ghost {
+    opacity: 0.5;
+     background-color: #e0e0e0;
+}
+
+/* Add button styling */
+#addBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#addBtn:hover {
+    background-color: #45a049;
+}
+/* ... (previous styles remain the same) */
+
+/* Hide zoom button when showing all pages */
+.show-all-pages .file-item:hover .action-btn.zoom-btn {
+    display: none;
+}
+
+/* ... (rest of the styles) */
